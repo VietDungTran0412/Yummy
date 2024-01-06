@@ -1,0 +1,1 @@
+export const truncateString = (str, limit) => str.length <= limit ? str : str.substring(0, limit) + '...';

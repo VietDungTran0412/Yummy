@@ -29,7 +29,7 @@
         style="color: black"
         :to="`/restaurant/${this.restaurant?.alias}`"
       >
-        {{ restaurant?.name }}
+        {{ truncateString(restaurant?.name, 20)  }}
       </router-link>
       <v-btn
         @click="routeToDetail"
@@ -131,6 +131,7 @@
 <script>
 import { ref } from "vue";
 import Reservation from "./Reservation.vue";
+import {truncateString} from "@/utils/truncateString";
 
 export default {
   components: { Reservation },
@@ -141,6 +142,7 @@ export default {
     return { openReservation };
   },
   methods: {
+    truncateString,
     routeToDetail() {
       this.$router.push(`/restaurant/${this.restaurant?.alias}`);
     },

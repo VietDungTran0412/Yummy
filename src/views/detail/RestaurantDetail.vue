@@ -19,7 +19,7 @@
         <v-col cols="12" md="6" xs="12">
           <v-img
             :src="
-              detail.image_url
+              detail?.image_url
                 ? detail.image_url
                 : require('@/assets/notfound.jpeg')
             "
@@ -64,14 +64,14 @@
             <v-col cols="12" xs="12">
               <div class="flex justify-between items-start">
                 <div class="text-neutral-500 font-bold">Phone Number:</div>
-                <div>{{ detail.display_phone }}</div>
+                <div>{{ detail?.display_phone }}</div>
               </div>
             </v-col>
             <v-col cols="12" xs="12">
               <div class="flex justify-between items-start">
                 <div class="text-neutral-500 font-bold">Price:</div>
                 <div class="text-orange-600 font-bold">
-                  {{ detail.price }} - {{ convertPrice }}
+                  {{ detail?.price }} - {{ convertPrice }}
                 </div>
               </div>
             </v-col>
@@ -285,7 +285,8 @@ export default {
         $: "Reasonable",
         "": "No Defined",
       };
-      return map[this.detail?.price];
+      const key = this.detail?.price ? this.detail?.price : "";
+      return map[key];
     },
     mapWeekDay() {
       // Map weekday index to weekday title
@@ -298,14 +299,16 @@ export default {
         5: [],
         6: [],
       };
-      this.detail?.hours[0]?.open?.map((item) => {
-        let openingHours = {
-          start: item.start.substring(0, 2) + ":" + item.start.substring(2),
-          end: item.end.substring(0, 2) + ":" + item.end.substring(2),
-        };
-        // Check if the weekday match today --> Make it highlighted if it is opening
-        res[item.day].push(openingHours);
-      });
+      if(this.detail?.hours && this.detail?.hours[0]) {
+        this.detail?.hours[0]?.open?.map((item) => {
+          let openingHours = {
+            start: item.start.substring(0, 2) + ":" + item.start.substring(2),
+            end: item.end.substring(0, 2) + ":" + item.end.substring(2),
+          };
+          // Check if the weekday match today --> Make it highlighted if it is opening
+          res[item.day].push(openingHours);
+        });
+      }
       return res;
     },
   },
