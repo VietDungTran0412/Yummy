@@ -56,5 +56,30 @@ and their reviews throughout the world. For more information about Yelp API, ple
 ### Leave A Review
 ![User Review Input](images/application-user-review.png)
 
+## Deployment
+The application is fully deployed into AWS. The purpose of the deployment phase is to prove the paramount importance of 
+Content Network Delivery (CDN) in front-end performance optimization. For simplicity, Amazon CloudFront and S3 would be 
+employed
 
+<br/>
+
+The project employed Terraform to provision the whole infrastructure for the application in AWS. Note that it is required
+to navigate to the `/tf` directory to run terraform.
+
+### Provision AWS Infrastructure
+Initialize Terraform state
+```bash
+terraform init
+```
+
+<br/>
+
+Provision the Infrastructure
+```bash
+terraform apply -var-file=variables -auto-approve
+```
+
+<br/>
+
+It is required to modify the `./tf/variables.tfvars` file in order to modify the region and the bucket name.
 
