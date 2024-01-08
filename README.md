@@ -81,5 +81,9 @@ terraform apply -var-file=variables -auto-approve
 
 <br/>
 
-It is required to modify the `./tf/variables.tfvars` file in order to modify the region and the bucket name.
+It is required to modify the `./tf/variables.tfvars` file in order to modify the region and the bucket name. <br/>
+
+Once the infrastructure in AWS has been successfully applied, build the application. The plain application in HTML, CSS, and JS would be located in `dist` directory. Upload all the build files into the root directory in S3 <br/>
+
+The application will now be accessible via both CloudFront origin and S3 endpoint. 
 
